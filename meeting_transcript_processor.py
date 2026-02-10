@@ -6,7 +6,7 @@ s3 = boto3.client('s3')
 
 def lambda_handler(event, context):
     # Environment variables
-    output_bucket = os.environ['OUTPUT_BUCKET']
+    s3_bucket = os.environ['S3_BUCKET']
     output_prefix = os.environ.get("OUTPUT_PREFIX", "output")
 
     # Get the transcription job name from the EventBridge event
@@ -15,11 +15,11 @@ def lambda_handler(event, context):
     # Match the same output key pattern used by the first Lambda
     transcript_key = f"{output_prefix}/transcripts/{job_name}.json"
 
-    print(f"Fetching transcript from s3://{output_bucket}/{transcript_key}")
+    print(f"Fetching transcript from s3://{s3_bucket}/{transcript_key}")
 
     # Fetch the transcript from S3
     response = s3.get_object(
-        Bucket=output_bucket,
+        Bucket=s3_bucket,
         Key=transcript_key
     )
 
