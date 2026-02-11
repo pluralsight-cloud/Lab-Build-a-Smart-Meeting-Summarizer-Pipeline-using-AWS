@@ -18,7 +18,7 @@ def lambda_handler(event, context):
         job_name = key.replace('/', '_').replace('.', '_') + '_' + str(int(time.time()))
 
         job_uri = f's3://{bucket}/{key}'
-        output_key = f"{output_prefix}/transcripts/{job_name}.json"
+        output_key = f"{output_prefix}/{job_name}.json"
 
         response = transcribe.start_transcription_job(
             TranscriptionJobName=job_name,
