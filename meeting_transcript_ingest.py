@@ -31,4 +31,4 @@ def lambda_handler(event, context):
 
         print(f"Started transcription job: {job_name}")
         print(f"Input audio: s3://{bucket}/{key}")
-        print(f"
+        print(f"Output transcript will be saved to: s3://{s3_bucket}/{output_key}")
